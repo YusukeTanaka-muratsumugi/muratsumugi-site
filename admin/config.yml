@@ -1,0 +1,141 @@
+# ============================================================
+# ムラツムギ 管理画面(Decap CMS)設定
+# ここを変えると管理画面の項目が変わります。
+# 通常の運用で編集する必要はありません。
+# ============================================================
+
+backend:
+  name: git-gateway
+  branch: main
+
+locale: ja
+media_folder: "assets/uploads"
+public_folder: "assets/uploads"
+
+collections:
+  - name: "news"
+    label: "お知らせ"
+    files:
+      - name: "news_items"
+        label: "お知らせ一覧"
+        file: "content/news.json"
+        fields:
+          - label: "記事"
+            name: "items"
+            widget: list
+            summary: "{{fields.date}} {{fields.title}}"
+            fields:
+              - { label: "ID(半角英数。例 news-2026-08-event)", name: "id", widget: string }
+              - { label: "日付", name: "date", widget: datetime, format: "YYYY-MM-DD", time_format: false }
+              - { label: "カテゴリ", name: "category", widget: select, options: ["お知らせ", "活動報告", "メディア", "イベント"] }
+              - { label: "タイトル", name: "title", widget: string }
+              - { label: "写真(任意)", name: "photo", widget: image, required: false }
+              - { label: "本文(空行で段落区切り。URLは自動でリンクになります)", name: "body", widget: text }
+
+  - name: "members"
+    label: "メンバー"
+    files:
+      - name: "members_file"
+        label: "メンバー・アドバイザー"
+        file: "content/members.json"
+        fields:
+          - label: "主要メンバー"
+            name: "members"
+            widget: list
+            summary: "{{fields.name}}({{fields.role}})"
+            fields:
+              - { label: "名前", name: "name", widget: string }
+              - { label: "ローマ字(小文字)", name: "romaji", widget: string, required: false }
+              - { label: "肩書", name: "role", widget: string }
+              - { label: "顔写真", name: "photo", widget: image, required: false }
+              - { label: "略歴", name: "bio", widget: text }
+          - label: "メンバー(名前のみ)"
+            name: "simple_members"
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "名前", name: "name", widget: string }
+          - label: "アドバイザー"
+            name: "advisors"
+            widget: list
+            summary: "{{fields.name}}({{fields.affiliation}})"
+            fields:
+              - { label: "名前", name: "name", widget: string }
+              - { label: "所属・職位", name: "affiliation", widget: string }
+              - { label: "顔写真", name: "photo", widget: image, required: false }
+              - { label: "紹介文", name: "bio", widget: text }
+
+  - name: "works"
+    label: "主な実績"
+    files:
+      - name: "works_file"
+        label: "実績一覧"
+        file: "content/works.json"
+        fields:
+          - label: "実績"
+            name: "items"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "タイトル", name: "title", widget: string }
+              - { label: "補足(年度・発注元など。任意)", name: "meta", widget: string, required: false }
+              - { label: "写真(任意)", name: "photo", widget: image, required: false }
+              - { label: "詳しい説明", name: "description", widget: text }
+
+  - name: "activities"
+    label: "活動内容"
+    files:
+      - name: "activities_file"
+        label: "活動一覧"
+        file: "content/activities.json"
+        fields:
+          - label: "活動"
+            name: "items"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "写真(任意)", name: "photo", widget: image, required: false }
+              - { label: "タグ(例 ワークショップ)", name: "tag", widget: string }
+              - { label: "タイトル", name: "title", widget: string }
+              - { label: "短い説明(トップページ用・1〜2文)", name: "summary", widget: text }
+              - { label: "詳しい説明(活動内容ページ用)", name: "description", widget: text }
+              - { label: "リンクURL(任意。設定すると外部サイトに飛びます)", name: "url", widget: string, required: false }
+
+  - name: "pages"
+    label: "固定ページ"
+    files:
+      - name: "about_file"
+        label: "私たちについて"
+        file: "content/about.json"
+        fields:
+          - { label: "本文(空行で段落区切り)", name: "body", widget: text }
+          - { label: "考え方セクションの見出し", name: "philosophy_title", widget: string, required: false }
+          - { label: "考え方セクションの図解画像", name: "philosophy_image", widget: image, required: false }
+          - { label: "考え方セクションの本文(## で見出し、### で小見出し、[図解] の行に図が入ります)", name: "philosophy_body", widget: text, required: false }
+      - name: "message_file"
+        label: "代表メッセージ"
+        file: "content/message.json"
+        fields:
+          - { label: "見出し", name: "title", widget: string }
+          - { label: "本文(空行で段落区切り)", name: "body", widget: text }
+          - { label: "署名の肩書", name: "sign_title", widget: string }
+          - { label: "署名の名前", name: "sign_name", widget: string }
+
+  - name: "settings"
+    label: "サイト基本情報"
+    files:
+      - name: "site_file"
+        label: "基本情報"
+        file: "content/site.json"
+        fields:
+          - { label: "サイト名", name: "site_name", widget: string }
+          - { label: "キャッチコピー", name: "catch", widget: string }
+          - { label: "noteのURL", name: "note_url", widget: string }
+          - { label: "お問い合わせフォームのURL(Googleフォームの埋め込みURL)", name: "contact_form_url", widget: string, required: false }
+          - label: "団体概要"
+            name: "org"
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { label: "項目名", name: "label", widget: string }
+              - { label: "内容", name: "value", widget: text }
