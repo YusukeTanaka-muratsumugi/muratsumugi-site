@@ -478,6 +478,7 @@ a.stitch-card { display: block; color: inherit; }
 .resource-body p { font-size: 0.93rem; color: var(--hai); }
 .resource-action { margin-top: 20px; }
 .resource-action .btn small { margin-left: 10px; font-size: 0.75rem; opacity: 0.85; font-weight: 500; }
+.resource-gate-note { margin-top: 10px; font-size: 0.8rem !important; color: var(--hai); }
 .btn--disabled { border-color: var(--line); color: var(--hai); cursor: default; }
 .btn--disabled:hover { background: var(--white); color: var(--hai); }
 .resource-note { margin-top: 40px; font-size: 0.9rem; color: var(--hai); }

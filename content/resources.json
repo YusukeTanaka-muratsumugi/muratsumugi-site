@@ -6,7 +6,8 @@
       "description": "集落や自治会の話し合いを支える市町村職員・中間支援組織の方に向けた、進行役のための運営ガイドです。地域の活動や役を将来の人口に見合う大きさに組み直す話し合いを、準備から実施まで、ワークショップのプログラムやたたき台カードとともに進められます。",
       "file": "assets/docs/murano-genchiku-manual.pdf",
       "file_info": "62ページ・1.1MB",
-      "cover": "assets/docs/murano-genchiku-manual-cover.jpg"
+      "cover": "assets/docs/murano-genchiku-manual-cover.jpg",
+      "form_url": "https://forms.gle/4nfvriJfiyvUg7Ke8"
     },
     {
       "title": "自治会・町内会の合併を考えるときに",
@@ -14,7 +15,8 @@
       "description": "地域で合併の話が出たときに、区長・自治会長や住民の方へそのまま手渡せる話し合いの手引きです。合併が本当に必要かを考えるところから、実際に進める手順、決めることの一覧、合意書のたたき台までを、平易な言葉でまとめています。",
       "file": "assets/docs/jichikai-gappei-guide.pdf",
       "file_info": "20ページ・0.6MB",
-      "cover": "assets/docs/jichikai-gappei-guide-cover.jpg"
+      "cover": "assets/docs/jichikai-gappei-guide-cover.jpg",
+      "form_url": ""
     }
   ]
 }

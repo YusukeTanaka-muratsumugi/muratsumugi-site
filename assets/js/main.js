@@ -215,13 +215,18 @@ const renderers = {
   async resources() {
     const data = await loadJSON("content/resources.json");
     $("#resources-list").innerHTML = data.items.map(r => {
-      const btn = r.file
-        ? `<a class="btn btn--fill" href="${esc(r.file)}" target="_blank" rel="noopener" download>PDFをダウンロード${r.file_info ? `<small>${esc(r.file_info)}</small>` : ""}</a>`
-        : `<span class="btn btn--disabled">準備中</span>`;
+      // form_url があれば「フォーム入力のあとダウンロード」、なければ直接ダウンロード
+      const href = r.form_url || r.file;
+      const btn = r.form_url
+        ? `<a class="btn btn--fill" href="${esc(r.form_url)}" target="_blank" rel="noopener">フォームに入力してダウンロード${r.file_info ? `<small>${esc(r.file_info)}</small>` : ""}</a>
+           <p class="resource-gate-note">簡単なご登録(1分ほど)のあと、ダウンロードページをご案内します。</p>`
+        : r.file
+          ? `<a class="btn btn--fill" href="${esc(r.file)}" target="_blank" rel="noopener" download>PDFをダウンロード${r.file_info ? `<small>${esc(r.file_info)}</small>` : ""}</a>`
+          : `<span class="btn btn--disabled">準備中</span>`;
       return `
         <article class="resource-card reveal">
           ${r.cover
-            ? `<a class="resource-cover" href="${esc(r.file || "#")}" target="_blank" rel="noopener"><img src="${esc(r.cover)}" alt="${esc(r.title)} 表紙" loading="lazy"></a>`
+            ? `<a class="resource-cover" href="${esc(href || "#")}" target="_blank" rel="noopener"><img src="${esc(r.cover)}" alt="${esc(r.title)} 表紙" loading="lazy"></a>`
             : `<div class="resource-icon" aria-hidden="true">PDF</div>`}
           <div class="resource-body">
             ${r.audience ? `<span class="card-tag">${esc(r.audience)}</span>` : ""}
