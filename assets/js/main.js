@@ -205,8 +205,31 @@ const renderers = {
             <h2>${esc(w.title)}</h2>
             ${w.meta ? `<span class="card-tag">${esc(w.meta)}</span>` : ""}
             <div class="activity-desc">${paragraphs(w.description)}</div>
+            ${w.link && w.link.url ? `<p class="activity-link"><a class="btn" href="${esc(w.link.url)}">${esc(w.link.label || "詳しく見る")} →</a></p>` : ""}
           </div>
         </div>`;
+    }).join("");
+    document.dispatchEvent(new Event("content-ready"));
+  },
+
+  async resources() {
+    const data = await loadJSON("content/resources.json");
+    $("#resources-list").innerHTML = data.items.map(r => {
+      const btn = r.file
+        ? `<a class="btn btn--fill" href="${esc(r.file)}" target="_blank" rel="noopener" download>PDFをダウンロード${r.file_info ? `<small>${esc(r.file_info)}</small>` : ""}</a>`
+        : `<span class="btn btn--disabled">準備中</span>`;
+      return `
+        <article class="resource-card reveal">
+          ${r.cover
+            ? `<a class="resource-cover" href="${esc(r.file || "#")}" target="_blank" rel="noopener"><img src="${esc(r.cover)}" alt="${esc(r.title)} 表紙" loading="lazy"></a>`
+            : `<div class="resource-icon" aria-hidden="true">PDF</div>`}
+          <div class="resource-body">
+            ${r.audience ? `<span class="card-tag">${esc(r.audience)}</span>` : ""}
+            <h2>${esc(r.title)}</h2>
+            <p>${esc(r.description)}</p>
+            <div class="resource-action">${btn}</div>
+          </div>
+        </article>`;
     }).join("");
     document.dispatchEvent(new Event("content-ready"));
   },

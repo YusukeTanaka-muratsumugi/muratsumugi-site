@@ -59,7 +59,7 @@ a:focus-visible, button:focus-visible {
   max-width: var(--w-max); margin: 0 auto; padding: 14px 24px;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
-.brand { display: flex; align-items: center; gap: 12px; color: var(--sumi); }
+.brand { display: flex; align-items: center; gap: 12px; color: var(--sumi); white-space: nowrap; flex-shrink: 0; }
 .brand img { height: 44px; width: auto; }
 .brand-name {
   font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
@@ -70,10 +70,10 @@ a:focus-visible, button:focus-visible {
   letter-spacing: 0.14em;
 }
 
-.global-nav ul { display: flex; gap: 26px; list-style: none; align-items: center; }
+.global-nav ul { display: flex; gap: 20px; list-style: none; align-items: center; }
 .global-nav a {
-  color: var(--sumi); font-size: 0.9rem; font-weight: 500;
-  padding: 6px 2px; position: relative;
+  color: var(--sumi); font-size: 0.86rem; font-weight: 500;
+  padding: 6px 2px; position: relative; white-space: nowrap;
 }
 .global-nav a::after {
   content: ""; position: absolute; left: 0; right: 100%; bottom: 0;
@@ -105,7 +105,7 @@ a:focus-visible, button:focus-visible {
 .nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
 .nav-open .nav-toggle span:nth-child(3) { top: 22px; transform: rotate(-45deg); }
 
-@media (max-width: 860px) {
+@media (max-width: 1180px) {
   .nav-toggle { display: block; }
   .global-nav {
     display: none;
@@ -444,4 +444,46 @@ a.stitch-card { display: block; color: inherit; }
 .page-header h1 {
   font-family: var(--font-display); font-weight: 900;
   font-size: clamp(1.7rem, 4vw, 2.4rem); letter-spacing: 0.06em;
+}
+
+/* ---------- 資料・ツール ---------- */
+.resource-list { display: grid; gap: 24px; }
+.resource-card {
+  display: grid; grid-template-columns: 150px 1fr; gap: 32px; align-items: start;
+  border: 1.5px dashed var(--line); border-radius: 20px;
+  padding: 32px 30px; background: var(--white);
+  transition: border-color 0.25s ease;
+}
+.resource-card:hover { border-color: var(--shu); }
+.resource-icon {
+  width: 96px; height: 120px; border: 2px dashed var(--shu); border-radius: 10px;
+  display: flex; align-items: flex-end; justify-content: center; padding-bottom: 14px;
+  font-family: var(--font-display); font-weight: 900; color: var(--shu);
+  letter-spacing: 0.1em; background: var(--shu-tint);
+}
+.resource-cover { display: block; transition: transform 0.25s ease; }
+.resource-cover:hover { transform: translateY(-3px); }
+.resource-cover img {
+  width: 100%; border-radius: 4px; background: var(--white);
+  box-shadow: 0 1px 2px rgba(51,48,43,0.08), 0 6px 18px rgba(51,48,43,0.10);
+}
+.resource-body h2 {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.25rem;
+  letter-spacing: 0.04em; margin: 2px 0 10px;
+}
+.resource-body .card-tag {
+  display: inline-block; font-size: 0.72rem; font-weight: 700; color: var(--shu);
+  background: var(--shu-tint); border-radius: 999px; padding: 3px 12px; letter-spacing: 0.08em;
+}
+.resource-body p { font-size: 0.93rem; color: var(--hai); }
+.resource-action { margin-top: 20px; }
+.resource-action .btn small { margin-left: 10px; font-size: 0.75rem; opacity: 0.85; font-weight: 500; }
+.btn--disabled { border-color: var(--line); color: var(--hai); cursor: default; }
+.btn--disabled:hover { background: var(--white); color: var(--hai); }
+.resource-note { margin-top: 40px; font-size: 0.9rem; color: var(--hai); }
+.resource-note a { text-decoration: underline; }
+@media (max-width: 600px) {
+  .resource-card { grid-template-columns: 1fr; gap: 18px; padding: 24px 20px; }
+  .resource-cover { width: 140px; }
+  .resource-icon { width: 64px; height: 80px; font-size: 0.8rem; padding-bottom: 8px; }
 }
